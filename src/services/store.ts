@@ -1,5 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import ingredientsReducer from './slices/ingredientsSlice';
+import burgerConstructorReducer from './slices/burgerconstructorSlice';
 import {
   TypedUseSelectorHook,
   useDispatch as dispatchHook,
@@ -7,9 +8,16 @@ import {
 } from 'react-redux';
 
 const rootReducer = combineReducers({
-  ingredients: ingredientsReducer
+  // данные всех полученных ингредиентов;
+  ingredients: ingredientsReducer,
+  // данные конструктора бургера;
+  burgerConstructor: burgerConstructorReducer
+  // данные создания заказа;
+
+  // данные ленты и истории заказов;
   // order: orderReducer
-  // Можно добавить другие редьюсеры
+
+  // данные профиля пользователя.
 });
 const store = configureStore({
   reducer: rootReducer,
