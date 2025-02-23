@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'src/services/store';
 import { setCurrentIngredient } from '../../services/slices/ingredientsSlice';
 export const IngredientDetails: FC = () => {
+  /** TODO+: взять переменную из стора */
   const { id: ingredientId } = useParams<{ id: string }>();
   const dispatch = useDispatch();
   const ingredientData = useSelector(
@@ -17,13 +18,13 @@ export const IngredientDetails: FC = () => {
     ...state.ingredients.items.sauces
   ]);
 
-  // Находим ингредиент по ID и сохраняем его в хранилище
+  // Находим по id и сохраняем в хранилище
   useEffect(() => {
     const ingredient = allIngredients.find((item) => item._id === ingredientId);
     if (ingredient) {
       dispatch(setCurrentIngredient(ingredient));
     } else {
-      dispatch(setCurrentIngredient(null)); // Если ингредиент не найден
+      dispatch(setCurrentIngredient(null)); // Если  не найден
     }
   }, [ingredientId, allIngredients, dispatch]);
   if (!ingredientData) {
