@@ -9,6 +9,7 @@ export type TIngredientsState = {
     sauces: TIngredient[];
   };
   isIngredientsLoading: boolean;
+  currentIngredient: TIngredient | null;
   // error: string | null;
 };
 
@@ -18,7 +19,8 @@ const initialState: TIngredientsState = {
     mains: [],
     sauces: []
   },
-  isIngredientsLoading: false
+  isIngredientsLoading: false,
+  currentIngredient: null
   // error: null
 };
 export const fetchIngredients = createAsyncThunk(
@@ -35,7 +37,11 @@ export const fetchIngredients = createAsyncThunk(
 const ingredientsSlice = createSlice({
   name: 'ingredients',
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrentIngredient(state, action: { payload: TIngredient | null }) {
+      state.currentIngredient = action.payload;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchIngredients.pending, (state) => {
@@ -56,5 +62,7 @@ const ingredientsSlice = createSlice({
       });
   }
 });
+
+export const { setCurrentIngredient } = ingredientsSlice.actions;
 
 export default ingredientsSlice.reducer;
