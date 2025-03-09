@@ -2,17 +2,17 @@ import { FC, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
-import { RootState } from '../../services/store';
+import { RootState, AppDispatch } from '../../services/store'; // Импортируйте AppDispatch
 import {
   resetConstructor,
   setOrderRequest,
   setOrderModalData
 } from '../../services/slices/burgerconstructorSlice';
 import { orderBurgerApi } from '@api';
+import { fetchFeed } from '../../services/slices/feedSlice';
 
 export const BurgerConstructor: FC = () => {
-  /** TODO+: взять переменные constructorItems, orderRequest и orderModalData из стора */
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>(); // Используйте AppDispatch для типизации
   const constructorItems = useSelector(
     (state: RootState) => state.burgerConstructor.constructorItems
   );
@@ -31,13 +31,15 @@ export const BurgerConstructor: FC = () => {
       ...constructorItems.ingredients.map((ingredient) => ingredient._id),
       constructorItems.bun._id
     ];
-
     dispatch(setOrderRequest(true));
 
     try {
       const response = await orderBurgerApi(ingredients);
       dispatch(setOrderModalData(response.order));
+      console.log('Новый заказ:', response.order);
       dispatch(resetConstructor());
+      // После успешного создания заказа обновляем ленту заказов
+      dispatch(fetchFeed());
     } catch (error) {
       console.error('Ошибка при создании заказа:', error);
     } finally {
@@ -58,8 +60,6 @@ export const BurgerConstructor: FC = () => {
       ),
     [constructorItems]
   );
-
-  // return null;
 
   return (
     <BurgerConstructorUI
