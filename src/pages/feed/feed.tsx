@@ -12,8 +12,10 @@ export const Feed: FC = () => {
   const { orders } = useSelector((state: RootState) => state.feed);
 
   useEffect(() => {
-    dispatch(fetchFeed());
-  }, [dispatch]);
+    if (!orders || !orders.length) {
+      dispatch(fetchFeed());
+    }
+  }, []);
 
   if (!orders || !orders.length) {
     return <Preloader />;

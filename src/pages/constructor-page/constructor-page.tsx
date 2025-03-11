@@ -11,12 +11,19 @@ import { fetchIngredients } from '../../services/slices/ingredientsSlice';
 export const ConstructorPage: FC = () => {
   /** TODO+: взять переменную из стора */
   const dispatch = useDispatch();
-  const { isIngredientsLoading } = useSelector(
+  const { items, isIngredientsLoading } = useSelector(
     (state: RootState) => state.ingredients
   );
   useEffect(() => {
-    dispatch(fetchIngredients());
-  }, [dispatch]);
+    if (
+      items.buns.length === 0 &&
+      items.mains.length === 0 &&
+      items.sauces.length === 0
+    ) {
+      dispatch(fetchIngredients());
+    }
+  }, []);
+
   return (
     <>
       {isIngredientsLoading ? (

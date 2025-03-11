@@ -7,15 +7,19 @@ import { RootState, AppDispatch } from '../../services/store';
 export const ProfileOrders: FC = () => {
   /** TODO: взять переменную из стора */
   const dispatch = useDispatch<AppDispatch>();
-
-  const orders: TOrder[] = useSelector(
-    (state: RootState) => state.order.orders
-  );
+  const { isAuthenticated } = useSelector((state: RootState) => state.user);
+  const {
+    orders,
+    userOrdersLoading: loading,
+    userOrdersError: error
+  } = useSelector((state: RootState) => state.feed);
 
   // Загружаем заказы при монтировании компонента
   useEffect(() => {
-    dispatch(fetchUserOrders());
-  }, [dispatch]);
+    if (isAuthenticated) {
+      dispatch(fetchUserOrders());
+    }
+  }, [dispatch, isAuthenticated]);
 
   return <ProfileOrdersUI orders={orders} />;
 };
