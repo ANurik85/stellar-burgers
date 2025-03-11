@@ -1,156 +1,7 @@
-// import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-// import { TOrder, TIngredient } from '@utils-types';
-// import {
-//   getIngredientsApi,
-//   getFeedsApi,
-//   getOrdersApi,
-//   orderBurgerApi,
-//   getOrderByNumberApi
-// } from '../../utils/burger-api';
-
-// export type TOrderState = {
-//   orders: TOrder[];
-//   ingredients: TIngredient[];
-//   total: number;
-//   totalToday: number;
-//   loading: boolean;
-//   error: string | null;
-// };
-
-// const initialState: TOrderState = {
-//   orders: [],
-//   ingredients: [],
-//   total: 0,
-//   totalToday: 0,
-//   loading: false,
-//   error: null
-// };
-
-// // Асинхронные действия
-// export const fetchIngredients = createAsyncThunk(
-//   'order/fetchIngredients',
-//   async () => {
-//     const data = await getIngredientsApi();
-//     return data;
-//   }
-// );
-
-// export const fetchFeeds = createAsyncThunk('order/fetchFeeds', async () => {
-//   const data = await getFeedsApi();
-//   return data;
-// });
-
-// export const fetchOrders = createAsyncThunk('order/fetchOrders', async () => {
-//   const data = await getOrdersApi();
-//   return data;
-// });
-
-// export const createOrder = createAsyncThunk(
-//   'order/createOrder',
-//   async (ingredients: string[]) => {
-//     const data = await orderBurgerApi(ingredients);
-//     return data.order;
-//   }
-// );
-
-// export const fetchOrderByNumber = createAsyncThunk(
-//   'order/fetchOrderByNumber',
-//   async (number: number) => {
-//     const data = await getOrderByNumberApi(number);
-//     return data.orders[0]; // Возвращаем первый заказ из массива
-//   }
-// );
-
-// const orderSlice = createSlice({
-//   name: 'order',
-//   initialState,
-//   reducers: {
-//     // Синхронные редьюсеры (если нужны)
-//     resetError: (state) => {
-//       state.error = null;
-//     }
-//   },
-//   extraReducers: (builder) => {
-//     builder
-//       // Загрузка ингредиентов
-//       .addCase(fetchIngredients.pending, (state) => {
-//         state.loading = true;
-//       })
-//       .addCase(fetchIngredients.fulfilled, (state, action) => {
-//         state.ingredients = action.payload;
-//         state.loading = false;
-//       })
-//       .addCase(fetchIngredients.rejected, (state, action) => {
-//         state.error = action.error.message || 'Failed to fetch ingredients';
-//         state.loading = false;
-//       })
-
-//       // Загрузка ленты заказов
-//       .addCase(fetchFeeds.pending, (state) => {
-//         state.loading = true;
-//       })
-//       .addCase(fetchFeeds.fulfilled, (state, action) => {
-//         state.orders = action.payload.orders;
-//         state.total = action.payload.total;
-//         state.totalToday = action.payload.totalToday;
-//         state.loading = false;
-//       })
-//       .addCase(fetchFeeds.rejected, (state, action) => {
-//         state.error = action.error.message || 'Failed to fetch feeds';
-//         state.loading = false;
-//       })
-
-//       // Загрузка заказов пользователя
-//       .addCase(fetchOrders.pending, (state) => {
-//         state.loading = true;
-//       })
-//       .addCase(fetchOrders.fulfilled, (state, action) => {
-//         state.orders = action.payload;
-//         state.loading = false;
-//       })
-//       .addCase(fetchOrders.rejected, (state, action) => {
-//         state.error = action.error.message || 'Failed to fetch orders';
-//         state.loading = false;
-//       })
-
-//       // Создание заказа
-//       .addCase(createOrder.pending, (state) => {
-//         state.loading = true;
-//       })
-//       .addCase(createOrder.fulfilled, (state, action) => {
-//         state.orders.unshift(action.payload); // Добавляем новый заказ в начало списка
-//         state.loading = false;
-//       })
-//       .addCase(createOrder.rejected, (state, action) => {
-//         state.error = action.error.message || 'Failed to create order';
-//         state.loading = false;
-//       })
-
-//       // Получение заказа по номеру
-//       .addCase(fetchOrderByNumber.pending, (state) => {
-//         state.loading = true;
-//       })
-//       .addCase(fetchOrderByNumber.fulfilled, (state, action) => {
-//         state.orders = [action.payload]; // Сохраняем заказ в массиве
-//         state.loading = false;
-//       })
-//       .addCase(fetchOrderByNumber.rejected, (state, action) => {
-//         state.error = action.error.message || 'Failed to fetch order by number';
-//         state.loading = false;
-//       });
-//   }
-// });
-
-// // Экспорт синхронных редьюсеров (если есть)
-// export const { resetError } = orderSlice.actions;
-
-// export default orderSlice.reducer;
-
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { orderBurgerApi, getOrderByNumberApi, getOrdersApi } from '@api';
+import { orderBurgerApi, getOrderByNumberApi } from '@api';
 import { TIngredient, TOrder } from '@utils-types';
 import { RootState } from '../store';
-import { setCurrentIngredient } from './ingredientsSlice';
 
 export const createOrder = createAsyncThunk(
   'order/createOrder',
@@ -171,11 +22,7 @@ export const createOrder = createAsyncThunk(
     return await orderBurgerApi(ingredientIds);
   }
 );
-export const fetchOrders = createAsyncThunk('order/fetchOrders', async () => {
-  // You'll need to implement or import getOrdersApi
-  const data = await getOrdersApi();
-  return data;
-});
+
 export const getOrderByNumber = createAsyncThunk(
   'order/getOrderByNumber',
   async (number: number) => {
@@ -242,17 +89,6 @@ const orderSlice = createSlice({
       .addCase(getOrderByNumber.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || 'Ошибка при получении заказа';
-      })
-      .addCase(fetchOrders.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(fetchOrders.fulfilled, (state, action) => {
-        state.orders = action.payload;
-        state.loading = false;
-      })
-      .addCase(fetchOrders.rejected, (state, action) => {
-        state.error = action.error.message || 'Failed to fetch orders';
-        state.loading = false;
       });
   }
 });
