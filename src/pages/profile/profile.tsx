@@ -1,13 +1,12 @@
 import { ProfileUI } from '@ui-pages';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { updateUser, clearError } from '../../services/slices/userSlice';
 import { logoutUser } from '../../services/slices/userSlice';
-import { RootState, AppDispatch } from '../../services/store';
+import { RootState, useDispatch, useSelector } from '../../services/store';
 
 export const Profile: FC = () => {
   /** TODO: взять переменную из стора */
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch();
   const { user, isLoading, error } = useSelector(
     (state: RootState) => state.user
   );

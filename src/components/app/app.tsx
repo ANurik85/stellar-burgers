@@ -15,8 +15,7 @@ import { ProtectedRoute } from '../ProtectedRoute';
 import { Modal } from '../modal';
 import { OrderInfo } from '../order-info';
 import { IngredientDetails } from '../ingredient-details';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../services/store';
+import { RootState, useSelector } from '../../services/store';
 
 const App = () => {
   const location = useLocation();
