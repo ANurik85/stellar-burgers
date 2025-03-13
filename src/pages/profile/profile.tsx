@@ -4,12 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateUser, clearError } from '../../services/slices/userSlice';
 import { logoutUser } from '../../services/slices/userSlice';
 import { RootState, AppDispatch } from '../../services/store';
-import { useNavigate } from 'react-router-dom';
 
 export const Profile: FC = () => {
   /** TODO: взять переменную из стора */
   const dispatch = useDispatch<AppDispatch>();
-  const navigate = useNavigate();
   const { user, isLoading, error } = useSelector(
     (state: RootState) => state.user
   );

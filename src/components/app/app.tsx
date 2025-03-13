@@ -15,12 +15,16 @@ import { ProtectedRoute } from '../ProtectedRoute';
 import { Modal } from '../modal';
 import { OrderInfo } from '../order-info';
 import { IngredientDetails } from '../ingredient-details';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../services/store';
 
 const App = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const backgroundLocation = location.state?.background;
-
+  const orderNumber = useSelector(
+    (state: RootState) => state.order.currentOrder?.number
+  );
   const handleClose = () => {
     navigate(-1);
   };
@@ -86,7 +90,7 @@ const App = () => {
           <Route
             path='/feed/:number'
             element={
-              <Modal title='Информация о заказе' onClose={handleClose}>
+              <Modal title={`#${orderNumber}`} onClose={handleClose}>
                 <OrderInfo />
               </Modal>
             }
@@ -94,7 +98,7 @@ const App = () => {
           <Route
             path='/ingredients/:id'
             element={
-              <Modal title='Информация об ингредиенте' onClose={handleClose}>
+              <Modal title='Детали ингредиента' onClose={handleClose}>
                 <IngredientDetails />
               </Modal>
             }
@@ -102,7 +106,7 @@ const App = () => {
           <Route
             path='/profile/orders/:number'
             element={
-              <Modal title='Информация о заказе' onClose={handleClose}>
+              <Modal title={`#${orderNumber}`} onClose={handleClose}>
                 <OrderInfo />
               </Modal>
             }
