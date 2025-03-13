@@ -5,7 +5,7 @@ import { TIngredient, TOrder } from '@utils-types';
 import { RootState, useSelector } from '../../services/store';
 
 export const OrderInfo: FC = () => {
-  /** TODO+: взять переменные orderData и ingredients из стора */
+  /** TODO: взять переменные orderData и ingredients из стора */
   const orderData = useSelector((state: RootState) => state.order.currentOrder);
   const ingredients = useSelector(
     (state: RootState) => state.ingredients.items

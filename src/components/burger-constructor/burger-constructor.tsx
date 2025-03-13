@@ -2,7 +2,7 @@ import { FC, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
-import { RootState, AppDispatch, useSelector } from '../../services/store'; // Импортируйте AppDispatch
+import { RootState, AppDispatch, useSelector } from '../../services/store';
 import {
   resetConstructor,
   setOrderRequest,

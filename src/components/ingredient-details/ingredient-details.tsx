@@ -5,7 +5,7 @@ import { IngredientDetailsUI } from '../ui/ingredient-details';
 import { RootState, useDispatch, useSelector } from '../../services/store';
 import { setCurrentIngredient } from '../../services/slices/ingredientsSlice';
 export const IngredientDetails: FC = () => {
-  /** TODO+: взять переменную из стора */
+  /** TODO: взять переменную из стора */
   const { id: ingredientId } = useParams<{ id: string }>();
   const dispatch = useDispatch();
   const ingredientData = useSelector(

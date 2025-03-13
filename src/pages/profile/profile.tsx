@@ -53,9 +53,7 @@ export const Profile: FC = () => {
       .then(() => {
         dispatch(logoutUser());
       })
-      .catch(() => {
-        // Ошибка обрабатывается в slice
-      });
+      .catch(() => {});
   };
 
   const handleCancel = (e: SyntheticEvent) => {
