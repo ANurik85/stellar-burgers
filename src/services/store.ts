@@ -8,6 +8,7 @@ import {
   useSelector as selectorHook
 } from 'react-redux';
 import feedSlice from './slices/feedSlice';
+import userSlice from './slices/userSlice';
 const rootReducer = combineReducers({
   // данные всех полученных ингредиентов;
   ingredients: ingredientsSlice,
@@ -16,8 +17,9 @@ const rootReducer = combineReducers({
   // данные создания заказа;
   order: orderSlice,
   // данные ленты и истории заказов;
-  feed: feedSlice
+  feed: feedSlice,
   // данные профиля пользователя.
+  user: userSlice
 });
 const store = configureStore({
   reducer: rootReducer,

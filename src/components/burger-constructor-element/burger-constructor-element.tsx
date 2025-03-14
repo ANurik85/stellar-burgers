@@ -1,7 +1,7 @@
 import { FC, memo } from 'react';
 import { BurgerConstructorElementUI } from '@ui';
 import { BurgerConstructorElementProps } from './type';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../services/store';
 import { useLocation } from 'react-router-dom';
 import {
   removeIngredient,
@@ -23,7 +23,6 @@ export const BurgerConstructorElement: FC<BurgerConstructorElementProps> = memo(
     };
     const handleClose = () => {
       dispatch(removeIngredient(ingredient.id));
-      console.log('handleClose');
     };
 
     return (

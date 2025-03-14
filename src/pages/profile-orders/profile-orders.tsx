@@ -1,21 +1,23 @@
 import { ProfileOrdersUI } from '@ui-pages';
-import { TOrder } from '@utils-types';
 import { FC, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserOrders } from '../../services/slices/feedSlice';
-import { RootState, AppDispatch } from '../../services/store';
+import { RootState, useDispatch, useSelector } from '../../services/store';
 export const ProfileOrders: FC = () => {
   /** TODO: взять переменную из стора */
-  const dispatch = useDispatch<AppDispatch>();
-
-  const orders: TOrder[] = useSelector(
-    (state: RootState) => state.order.orders
-  );
+  const dispatch = useDispatch();
+  const { isAuthenticated } = useSelector((state: RootState) => state.user);
+  const {
+    orders,
+    userOrdersLoading: loading,
+    userOrdersError: error
+  } = useSelector((state: RootState) => state.feed);
 
   // Загружаем заказы при монтировании компонента
   useEffect(() => {
-    dispatch(fetchUserOrders());
-  }, [dispatch]);
+    if (isAuthenticated) {
+      dispatch(fetchUserOrders());
+    }
+  }, [dispatch, isAuthenticated]);
 
   return <ProfileOrdersUI orders={orders} />;
 };

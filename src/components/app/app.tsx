@@ -11,16 +11,19 @@ import { Profile } from '@pages';
 import { ProfileOrders } from '@pages';
 import { NotFound404 } from '@pages';
 import { AppHeader } from '@components';
-// import { ProtectedRoute } from '../../components/ProtectedRoute';
+import { ProtectedRoute } from '../ProtectedRoute';
 import { Modal } from '../modal';
 import { OrderInfo } from '../order-info';
 import { IngredientDetails } from '../ingredient-details';
+import { RootState, useSelector } from '../../services/store';
 
 const App = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const backgroundLocation = location.state?.background;
-
+  const orderNumber = useSelector(
+    (state: RootState) => state.order.currentOrder?.number
+  );
   const handleClose = () => {
     navigate(-1);
   };
@@ -30,12 +33,54 @@ const App = () => {
       <Routes location={backgroundLocation || location}>
         <Route path='/' element={<ConstructorPage />} />
         <Route path='/feed' element={<Feed />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/forgot-password' element={<ForgotPassword />} />
-        <Route path='/reset-password' element={<ResetPassword />} />
-        <Route path='/profile' element={<Profile />} />
-        <Route path='/profile/orders' element={<ProfileOrders />} />
+        <Route
+          path='/login'
+          element={
+            <ProtectedRoute onlyUnAuth>
+              <Login />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/register'
+          element={
+            <ProtectedRoute onlyUnAuth>
+              <Register />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/forgot-password'
+          element={
+            <ProtectedRoute onlyUnAuth>
+              <ForgotPassword />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/reset-password'
+          element={
+            <ProtectedRoute onlyUnAuth>
+              <ResetPassword />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/profile'
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/profile/orders'
+          element={
+            <ProtectedRoute>
+              <ProfileOrders />
+            </ProtectedRoute>
+          }
+        />
         <Route path='*' element={<NotFound404 />} />
       </Routes>
 
@@ -44,7 +89,7 @@ const App = () => {
           <Route
             path='/feed/:number'
             element={
-              <Modal title='Информация о заказе' onClose={handleClose}>
+              <Modal title={`#${orderNumber}`} onClose={handleClose}>
                 <OrderInfo />
               </Modal>
             }
@@ -52,7 +97,7 @@ const App = () => {
           <Route
             path='/ingredients/:id'
             element={
-              <Modal title='Информация об ингредиенте' onClose={handleClose}>
+              <Modal title='Детали ингредиента' onClose={handleClose}>
                 <IngredientDetails />
               </Modal>
             }
@@ -60,7 +105,7 @@ const App = () => {
           <Route
             path='/profile/orders/:number'
             element={
-              <Modal title='Информация о заказе' onClose={handleClose}>
+              <Modal title={`#${orderNumber}`} onClose={handleClose}>
                 <OrderInfo />
               </Modal>
             }

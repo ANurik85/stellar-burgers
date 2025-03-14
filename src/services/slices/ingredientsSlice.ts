@@ -10,7 +10,6 @@ export type TIngredientsState = {
   };
   isIngredientsLoading: boolean;
   currentIngredient: TIngredient | null;
-  // error: string | null;
 };
 
 const initialState: TIngredientsState = {
@@ -21,7 +20,6 @@ const initialState: TIngredientsState = {
   },
   isIngredientsLoading: false,
   currentIngredient: null
-  // error: null
 };
 export const fetchIngredients = createAsyncThunk(
   'ingredients/fetchAll',
@@ -46,7 +44,6 @@ const ingredientsSlice = createSlice({
     builder
       .addCase(fetchIngredients.pending, (state) => {
         state.isIngredientsLoading = true;
-        // state.error = null;
       })
       .addCase(fetchIngredients.fulfilled, (state, action) => {
         state.isIngredientsLoading = false;
@@ -58,7 +55,6 @@ const ingredientsSlice = createSlice({
       })
       .addCase(fetchIngredients.rejected, (state, action) => {
         state.isIngredientsLoading = false;
-        // state.error = action.payload as string;
       });
   }
 });

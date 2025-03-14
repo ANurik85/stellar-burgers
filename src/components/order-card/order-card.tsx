@@ -5,18 +5,19 @@ import { TIngredient } from '@utils-types';
 import { OrderCardUI } from '../ui/order-card';
 import { RootState, useDispatch, useSelector } from '../../services/store';
 import { getOrderByNumber } from '../../services/slices/orderSlice';
+import { createSelector } from '@reduxjs/toolkit';
 
 const maxIngredients = 6;
-const selectIngredients = (state: RootState) => {
-  const { buns, mains, sauces } = state.ingredients.items;
-  return [...buns, ...mains, ...sauces];
-};
+const selectIngredients = createSelector(
+  (state: RootState) => state.ingredients.items,
+  ({ buns, mains, sauces }) => [...buns, ...mains, ...sauces]
+);
 
 export const OrderCard: FC<OrderCardProps> = memo(({ order }) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const ingredients = useSelector(selectIngredients);
-  /** TODO+: взять переменную из стора */
+  /** TODO: взять переменную из стора */
   const orderInfo = useMemo(() => {
     if (!ingredients.length) return null;
 
