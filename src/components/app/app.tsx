@@ -15,15 +15,30 @@ import { ProtectedRoute } from '../ProtectedRoute';
 import { Modal } from '../modal';
 import { OrderInfo } from '../order-info';
 import { IngredientDetails } from '../ingredient-details';
-import { RootState, useSelector } from '../../services/store';
+import { RootState, useSelector, useDispatch } from '../../services/store';
+import { useEffect } from 'react';
+import { getUser } from '../../services/slices/userSlice';
+import { getCookie } from '../../utils/cookie';
 
 const App = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const backgroundLocation = location.state?.background;
   const orderNumber = useSelector(
     (state: RootState) => state.order.currentOrder?.number
   );
+
+  useEffect(() => {
+    // Проверяем наличие токенов
+    const accessToken = getCookie('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    if (accessToken || refreshToken) {
+      dispatch(getUser());
+    }
+  }, [dispatch]);
+
   const handleClose = () => {
     navigate(-1);
   };

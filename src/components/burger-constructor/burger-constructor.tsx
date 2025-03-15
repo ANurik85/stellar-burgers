@@ -1,8 +1,12 @@
 import { FC, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
-import { RootState, AppDispatch, useSelector } from '../../services/store';
+import {
+  RootState,
+  AppDispatch,
+  useSelector,
+  useDispatch
+} from '../../services/store';
 import {
   resetConstructor,
   setOrderRequest,
@@ -13,7 +17,7 @@ import { fetchFeed } from '../../services/slices/feedSlice';
 import { useNavigate } from 'react-router-dom';
 
 export const BurgerConstructor: FC = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const isAuthenticated = useSelector(
     (state: RootState) => state.user.isAuthenticated
