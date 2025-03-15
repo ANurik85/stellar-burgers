@@ -38,3 +38,11 @@ export type TUser = {
 };
 
 export type TTabMode = 'bun' | 'sauce' | 'main';
+
+export interface RootState {
+  ingredients: {
+    buns: TIngredient[];
+    mains: TIngredient[];
+    sauces: TIngredient[];
+  };
+}
