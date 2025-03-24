@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { setCookie, getCookie } from '../../utils/cookie';
+import { setCookie, getCookie } from '../../../utils/cookie';
 import {
   registerUserApi,
   loginUserApi,
@@ -8,7 +8,7 @@ import {
   updateUserApi,
   TRegisterData,
   TLoginData
-} from '../../utils/burger-api';
+} from '../../../utils/burger-api';
 
 export const registerUser = createAsyncThunk(
   'user/register',
@@ -65,7 +65,7 @@ const initialState: UserState = {
   isAuthenticated: false
 };
 
-const userSlice = createSlice({
+export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {

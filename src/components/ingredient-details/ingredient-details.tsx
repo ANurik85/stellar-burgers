@@ -2,8 +2,9 @@ import { FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Preloader } from '../ui/preloader';
 import { IngredientDetailsUI } from '../ui/ingredient-details';
-import { RootState, useDispatch, useSelector } from '../../services/store';
-import { setCurrentIngredient } from '../../services/slices/ingredientsSlice';
+import { useDispatch, useSelector } from '../../services/store';
+import { RootState } from '../../services/rootReducer';
+import { setCurrentIngredient } from '../../services/slices/ingredients/ingredientsSlice';
 export const IngredientDetails: FC = () => {
   /** TODO: взять переменную из стора */
   const { id: ingredientId } = useParams<{ id: string }>();

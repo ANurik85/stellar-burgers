@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { AppHeaderUI } from '@ui';
 import { useNavigate } from 'react-router-dom';
-import { RootState, useSelector } from '../../services/store';
+import { useSelector } from '../../services/store';
+import { RootState } from '../../services/rootReducer';
 
 export const AppHeader: FC = () => {
   const navigate = useNavigate();

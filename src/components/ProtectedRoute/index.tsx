@@ -1,6 +1,7 @@
 import { FC, ReactElement } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { RootState, useSelector } from '../../services/store';
+import { useSelector } from '../../services/store';
+import { RootState } from '../../services/rootReducer';
 
 interface ProtectedRouteProps {
   onlyUnAuth?: boolean;

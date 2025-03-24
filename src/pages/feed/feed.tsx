@@ -1,8 +1,9 @@
 import { Preloader } from '@ui';
 import { FeedUI } from '@ui-pages';
 import { FC, useEffect } from 'react';
-import { RootState, useDispatch, useSelector } from '../../services/store';
-import { fetchFeed } from '../../services/slices/feedSlice';
+import { useDispatch, useSelector } from '../../services/store';
+import { RootState } from '../../services/rootReducer';
+import { fetchFeed } from '../../services/slices/feed/feedSlice';
 
 export const Feed: FC = () => {
   /** TODO: взять переменную из стора */

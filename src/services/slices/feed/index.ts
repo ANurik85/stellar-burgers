@@ -1,0 +1,1 @@
+export { feedSlice } from './feedSlice';

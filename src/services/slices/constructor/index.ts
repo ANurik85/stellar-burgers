@@ -1,0 +1,1 @@
+export { burgerConstructorSlice } from './burgerconstructorSlice';

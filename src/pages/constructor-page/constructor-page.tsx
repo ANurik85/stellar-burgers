@@ -4,9 +4,10 @@ import { BurgerIngredients } from '../../components';
 import { BurgerConstructor } from '../../components';
 import { Preloader } from '../../components/ui';
 import { FC } from 'react';
-import { RootState, useSelector, useDispatch } from '../../services/store';
+import { useSelector, useDispatch } from '../../services/store';
+import { RootState } from '../../services/rootReducer';
 import { useEffect } from 'react';
-import { fetchIngredients } from '../../services/slices/ingredientsSlice';
+import { fetchIngredients } from '../../services/slices/ingredients/ingredientsSlice';
 
 export const ConstructorPage: FC = () => {
   /** TODO: взять переменную из стора */

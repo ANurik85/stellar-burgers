@@ -15,9 +15,10 @@ import { ProtectedRoute } from '../ProtectedRoute';
 import { Modal } from '../modal';
 import { OrderInfo } from '../order-info';
 import { IngredientDetails } from '../ingredient-details';
-import { RootState, useSelector, useDispatch } from '../../services/store';
+import { useSelector, useDispatch } from '../../services/store';
+import { RootState } from '../../services/rootReducer';
 import { useEffect } from 'react';
-import { getUser } from '../../services/slices/userSlice';
+import { getUser } from '../../services/slices/user/userSlice';
 import { getCookie } from '../../utils/cookie';
 
 const App = () => {

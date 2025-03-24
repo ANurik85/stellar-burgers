@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { orderBurgerApi, getOrderByNumberApi } from '@api';
 import { TIngredient, TOrder } from '@utils-types';
-import { RootState } from '../store';
+import { RootState } from '../../rootReducer';
 
 export const createOrder = createAsyncThunk(
   'order/createOrder',
@@ -51,7 +51,7 @@ const initialState: TOrderState = {
   isModalOpen: false
 };
 
-const orderSlice = createSlice({
+export const orderSlice = createSlice({
   name: 'order',
   initialState,
   reducers: {

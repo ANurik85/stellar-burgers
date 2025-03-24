@@ -1,8 +1,12 @@
 import { ProfileUI } from '@ui-pages';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
-import { updateUser, clearError } from '../../services/slices/userSlice';
-import { logoutUser } from '../../services/slices/userSlice';
-import { RootState, useDispatch, useSelector } from '../../services/store';
+import {
+  logoutUser,
+  updateUser,
+  clearError
+} from '../../services/slices/user/userSlice';
+import { useDispatch, useSelector } from '../../services/store';
+import { RootState } from '../../services/rootReducer';
 
 export const Profile: FC = () => {
   /** TODO: взять переменную из стора */

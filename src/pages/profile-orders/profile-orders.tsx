@@ -1,7 +1,8 @@
 import { ProfileOrdersUI } from '@ui-pages';
 import { FC, useEffect } from 'react';
-import { fetchUserOrders } from '../../services/slices/feedSlice';
-import { RootState, useDispatch, useSelector } from '../../services/store';
+import { fetchUserOrders } from '../../services/slices/feed/feedSlice';
+import { useDispatch, useSelector } from '../../services/store';
+import { RootState } from '../../services/rootReducer';
 export const ProfileOrders: FC = () => {
   /** TODO: взять переменную из стора */
   const dispatch = useDispatch();

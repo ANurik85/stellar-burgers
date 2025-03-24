@@ -2,8 +2,8 @@ import { FC, useMemo } from 'react';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient, TOrder } from '@utils-types';
-import { RootState, useSelector } from '../../services/store';
-
+import { useSelector } from '../../services/store';
+import { RootState } from '../../services/rootReducer';
 export const OrderInfo: FC = () => {
   /** TODO: взять переменные orderData и ingredients из стора */
   const orderData = useSelector((state: RootState) => state.order.currentOrder);

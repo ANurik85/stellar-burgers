@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, FC } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { RootState, useSelector, useDispatch } from '../../services/store';
+import { useSelector, useDispatch } from '../../services/store';
+import { RootState } from '../../services/rootReducer';
 import { TTabMode } from '@utils-types';
 import { BurgerIngredientsUI } from '../ui/burger-ingredients';
 export const BurgerIngredients: FC = () => {

@@ -1,19 +1,15 @@
 import { FC, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
-import {
-  RootState,
-  AppDispatch,
-  useSelector,
-  useDispatch
-} from '../../services/store';
+import { AppDispatch, useSelector, useDispatch } from '../../services/store';
+import { RootState } from '../../services/rootReducer';
 import {
   resetConstructor,
   setOrderRequest,
   setOrderModalData
-} from '../../services/slices/burgerconstructorSlice';
+} from '../../services/slices/constructor/burgerconstructorSlice';
 import { orderBurgerApi } from '@api';
-import { fetchFeed } from '../../services/slices/feedSlice';
+import { fetchFeed } from '../../services/slices/feed/feedSlice';
 import { useNavigate } from 'react-router-dom';
 
 export const BurgerConstructor: FC = () => {

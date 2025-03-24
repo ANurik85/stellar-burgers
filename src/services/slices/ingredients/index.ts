@@ -1,0 +1,1 @@
+export { ingredientsSlice } from './ingredientsSlice';

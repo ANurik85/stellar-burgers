@@ -18,7 +18,7 @@ const initialState: BurgerConstructorState = {
   orderRequest: false,
   orderModalData: null
 };
-const burgerConstructorSlice = createSlice({
+export const burgerConstructorSlice = createSlice({
   name: 'burgerConstructor',
   initialState,
   reducers: {
