@@ -5,7 +5,7 @@ import { IngredientDetailsUI } from '../ui/ingredient-details';
 import { useDispatch, useSelector } from '../../services/store';
 import { RootState } from '../../services/rootReducer';
 import { setCurrentIngredient } from '../../services/slices/ingredients/ingredientsSlice';
-export const IngredientDetails: FC = () => {
+export const IngredientDetails: FC = (...rest) => {
   /** TODO: взять переменную из стора */
   const { id: ingredientId } = useParams<{ id: string }>();
   const dispatch = useDispatch();
@@ -31,5 +31,5 @@ export const IngredientDetails: FC = () => {
     return <Preloader />;
   }
 
-  return <IngredientDetailsUI ingredientData={ingredientData} />;
+  return <IngredientDetailsUI ingredientData={ingredientData} {...rest} />;
 };

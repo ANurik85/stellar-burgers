@@ -12,7 +12,7 @@ import { orderBurgerApi } from '@api';
 import { fetchFeed } from '../../services/slices/feed/feedSlice';
 import { useNavigate } from 'react-router-dom';
 
-export const BurgerConstructor: FC = () => {
+export const BurgerConstructor: FC = (...rest) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isAuthenticated = useSelector(
@@ -77,6 +77,7 @@ export const BurgerConstructor: FC = () => {
       orderModalData={orderModalData}
       onOrderClick={onOrderClick}
       closeOrderModal={closeOrderModal}
+      {...rest}
     />
   );
 };

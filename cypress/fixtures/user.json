@@ -1,3 +1,4 @@
 {
-  "example": "Using fixtures to represent data"
+  "success": true,
+  "user": {"email": "test@mail.com", "name": "TestUser"}
 }

@@ -113,7 +113,11 @@ const App = () => {
           <Route
             path='/ingredients/:id'
             element={
-              <Modal title='Детали ингредиента' onClose={handleClose}>
+              <Modal
+                title='Детали ингредиента'
+                onClose={handleClose}
+                data-cy='ingredient-modal'
+              >
                 <IngredientDetails />
               </Modal>
             }
