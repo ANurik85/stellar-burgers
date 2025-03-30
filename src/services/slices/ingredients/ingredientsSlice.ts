@@ -12,7 +12,7 @@ export type TIngredientsState = {
   currentIngredient: TIngredient | null;
 };
 
-const initialState: TIngredientsState = {
+export const initialState: TIngredientsState = {
   items: {
     buns: [],
     mains: [],

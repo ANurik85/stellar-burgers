@@ -4,17 +4,11 @@ import userReducer, {
   logoutUser,
   getUser,
   updateUser,
-  clearError
+  clearError,
+  initialState
 } from './userSlice';
 
 describe('user reducer', () => {
-  const initialState = {
-    user: null,
-    isLoading: false,
-    error: null,
-    isAuthenticated: false
-  };
-
   const mockUser = {
     email: 'test@test.com',
     name: 'Test User'

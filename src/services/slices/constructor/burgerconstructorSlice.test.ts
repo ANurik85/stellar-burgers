@@ -5,20 +5,12 @@ import burgerConstructorReducer, {
   setOrderRequest,
   setOrderModalData,
   moveIngredientUp,
-  moveIngredientDown
+  moveIngredientDown,
+  initialState
 } from './burgerconstructorSlice';
 import { TIngredient, TConstructorIngredient, TOrder } from '@utils-types';
 
 describe('burgerConstructor reducer', () => {
-  const initialState = {
-    constructorItems: {
-      bun: null,
-      ingredients: []
-    },
-    orderRequest: false,
-    orderModalData: null
-  };
-
   const mockIngredient: TIngredient = {
     _id: '1',
     type: 'main',

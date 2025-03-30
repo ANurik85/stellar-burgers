@@ -2,21 +2,12 @@ import orderReducer, {
   createOrder,
   getOrderByNumber,
   openOrderModal,
-  closeOrderModal
+  closeOrderModal,
+  initialState
 } from './orderSlice';
 import { TOrder } from '@utils-types';
 
 describe('order reducer', () => {
-  const initialState = {
-    orders: [],
-    ingredients: [],
-    currentOrder: null,
-    orderNumber: null,
-    loading: false,
-    error: null,
-    isModalOpen: false
-  };
-
   it('should return initial state', () => {
     expect(orderReducer(undefined, { type: 'unknown' })).toEqual(initialState);
   });
