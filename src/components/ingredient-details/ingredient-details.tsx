@@ -1,14 +1,35 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { Preloader } from '../ui/preloader';
 import { IngredientDetailsUI } from '../ui/ingredient-details';
-
-export const IngredientDetails: FC = () => {
+import { useDispatch, useSelector } from '../../services/store';
+import { RootState } from '../../services/rootReducer';
+import { setCurrentIngredient } from '../../services/slices/ingredients/ingredientsSlice';
+export const IngredientDetails: FC = (...rest) => {
   /** TODO: взять переменную из стора */
-  const ingredientData = null;
+  const { id: ingredientId } = useParams<{ id: string }>();
+  const dispatch = useDispatch();
+  const ingredientData = useSelector(
+    (state: RootState) => state.ingredients.currentIngredient
+  );
+  const allIngredients = useSelector((state: RootState) => [
+    ...state.ingredients.items.buns,
+    ...state.ingredients.items.mains,
+    ...state.ingredients.items.sauces
+  ]);
 
+  // Находим по id и сохраняем в хранилище
+  useEffect(() => {
+    const ingredient = allIngredients.find((item) => item._id === ingredientId);
+    if (ingredient) {
+      dispatch(setCurrentIngredient(ingredient));
+    } else {
+      dispatch(setCurrentIngredient(null)); // Если  не найден
+    }
+  }, [ingredientId, allIngredients, dispatch]);
   if (!ingredientData) {
     return <Preloader />;
   }
 
-  return <IngredientDetailsUI ingredientData={ingredientData} />;
+  return <IngredientDetailsUI ingredientData={ingredientData} {...rest} />;
 };
